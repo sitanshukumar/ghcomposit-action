@@ -1,6 +1,5 @@
 FROM sonarsource/sonar-scanner-cli:4.7
-RUN useradd -u 8877 john
-USER john
+
 LABEL version="1.1.0" \
       maintainer="SonarSource" 
       
@@ -9,5 +8,5 @@ LABEL version="1.1.0" \
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 COPY cleanup.sh /cleanup.sh
-RUN chmod +x /cleanup.sh
+#RUN chmod +x /cleanup.sh
 ENTRYPOINT ["/entrypoint.sh"]
