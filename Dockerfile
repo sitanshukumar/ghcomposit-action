@@ -1,5 +1,4 @@
 FROM sonarsource/sonar-scanner-cli:4.7
-RUN apt-get -y update
 ARG USERNAME=sonar
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
