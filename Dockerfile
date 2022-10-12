@@ -1,6 +1,9 @@
 FROM sonarsource/sonar-scanner-cli:4.7
 
-LABEL maintainer Hitachivantara
+LABEL version="1.1.0" \
+      maintainer="SonarSource" 
+      
+
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
