@@ -1,5 +1,7 @@
 FROM sonarsource/sonar-scanner-cli:4.7
-
+RUN apt-get -y update
+RUN groupadd -r sonar && useradd -r -g sonar sonar
+USER sonar
 LABEL maintainer Hitachivantara
 
 COPY entrypoint.sh /entrypoint.sh
