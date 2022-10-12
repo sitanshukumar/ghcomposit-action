@@ -1,5 +1,6 @@
 FROM sonarsource/sonar-scanner-cli:4.7
-USER $USER 
+RUN useradd -u 8877 john
+USER john
 LABEL version="1.1.0" \
       maintainer="SonarSource" 
       
