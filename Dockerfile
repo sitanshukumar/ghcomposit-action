@@ -1,8 +1,5 @@
 FROM sonarsource/sonar-scanner-cli:4.7
-# Add a new user "john" with user id 8877
-RUN useradd -u 8877 sonar
-# Change to non-root privilege
-USER sonar
+USER $USER 
 LABEL version="1.1.0" \
       maintainer="SonarSource" 
       
