@@ -3,13 +3,15 @@ FROM sonarsource/sonar-scanner-cli:4.7
 LABEL version="1.1.0" \
       maintainer="SonarSource" 
 RUN apk add sudo
-RUN NEWUSER='sonar'
-RUN adduser -g "${NEWUSER}" $NEWUSER
-RUN echo "$NEWUSER ALL=(ALL) ALL" > /etc/sudoers.d/$NEWUSER && chmod 0440 /etc/sudoers.d/$NEWUSER
-USER $NEWUSER
+
+# Create a group and user
+RUN addgroup -S sonargrp && adduser -S sonar -G sonargrp
+
+# Tell docker that all future commands should run as the sonar user
+USER sonar
 
 COPY entrypoint.sh /entrypoint.sh
-RUN chmod 777 /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 COPY cleanup.sh /cleanup.sh
-RUN chmod 777 /cleanup.sh
+RUN chmod +x /cleanup.sh
 ENTRYPOINT ["/entrypoint.sh"]
