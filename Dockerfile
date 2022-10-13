@@ -5,9 +5,6 @@ RUN adduser -g "${NEWUSER}" $NEWUSER
 RUN echo "$NEWUSER ALL=(ALL) ALL" > /etc/sudoers.d/$NEWUSER && chmod 0440 /etc/sudoers.d/$NEWUSER
 USER $NEWUSER
 
-LABEL version="1.1.0" \
-      maintainer="SonarSource" 
-
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 COPY cleanup.sh /cleanup.sh
