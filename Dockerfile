@@ -4,7 +4,7 @@ LABEL version="1.1.0" \
       maintainer="SonarSource" 
 RUN apk add --no-cache shadow
 ARG USERNAME=sonar
-ARG USER_UID=1000
+ARG USER_UID=1001
 ARG USER_GID=$USER_UID
 RUN addgroup -S sonar
 RUN groupmod --gid $USER_GID $USERNAME \
