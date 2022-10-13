@@ -9,6 +9,7 @@ RUN addgroup -S sonargrp && adduser -S sonar -G sonargrp
 
 # Tell docker that all future commands should run as the sonar user
 USER sonar
+RUN chmod=rwx .
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
