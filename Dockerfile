@@ -1,4 +1,5 @@
 FROM sonarsource/sonar-scanner-cli:4.7
+USER root
 RUN apk add sudo
 ARG NEWUSER='sonar'
 RUN adduser -D -g "${NEWUSER}" $NEWUSER
