@@ -1,8 +1,9 @@
 FROM sonarsource/sonar-scanner-cli:4.7
-RUN groupadd docker
-RUN useradd -u 8877 sonar
-RUN usermod -aG docker sonar
-USER sonar
+RUN apk add sudo
+ARG NEWUSER='sonar'
+RUN adduser -g "${NEWUSER}" $NEWUSER
+RUN echo "$NEWUSER ALL=(ALL) ALL" > /etc/sudoers.d/$NEWUSER && chmod 0440 /etc/sudoers.d/$NEWUSER
+USER $NEWUSER
 
 LABEL version="1.1.0" \
       maintainer="SonarSource" 
