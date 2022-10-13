@@ -2,19 +2,15 @@ FROM sonarsource/sonar-scanner-cli:4.7
 
 LABEL version="1.1.0" \
       maintainer="SonarSource" 
-SHELL ["/bin/sh", "-c"]
-RUN apk add --no-cache bash
-ARG user=sonar
-ARG home=/home/$user
-RUN addgroup -S docker
-RUN adduser \
-    --disabled-password \
-    --gecos "" \
-    --home $home \
-    --ingroup docker \
-    $user
-WORKDIR $home
-USER $user
+RUN apk add --no-cache shadow
+ARG USERNAME=sonar
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+
+RUN groupmod --gid $USER_GID $USERNAME \
+    && usermod --uid $USER_UID --gid $USER_GID $USERNAME \
+    && chown -R $USER_UID:$USER_GID /home/$USERNAME
+USER $USERNAME
 COPY entrypoint.sh $home/entrypoint.sh
 RUN chmod 777 $home/entrypoint.sh
 COPY cleanup.sh $home//cleanup.sh .
