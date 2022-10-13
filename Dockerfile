@@ -2,10 +2,11 @@ FROM sonarsource/sonar-scanner-cli:4.7
 
 LABEL version="1.1.0" \
       maintainer="SonarSource" 
-RUN useradd −u 8877 nonroot
-RUN groupadd docker
-RUN usermod −aG docker nonroot
-USER nonroot
+RUN apk add sudo
+RUN NEWUSER='sonar'
+RUN adduser -g "${NEWUSER}" $NEWUSER
+RUN echo "$NEWUSER ALL=(ALL) ALL" > /etc/sudoers.d/$NEWUSER && chmod 0440 /etc/sudoers.d/$NEWUSER
+USER $NEWUSER
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod 777 /entrypoint.sh
