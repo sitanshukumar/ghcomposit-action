@@ -1,7 +1,7 @@
 FROM sonarsource/sonar-scanner-cli:4.7
 
 LABEL version="1.1.0" \
-      maintainer="SonarSource" \
+      maintainer="SonarSource" 
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
