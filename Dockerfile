@@ -6,7 +6,7 @@ RUN apk add --no-cache shadow
 ARG USERNAME=sonar
 ARG USER_UID=1001
 ARG USER_GID=$USER_UID
-RUN adduser $USERNAME
+RUN adduser -D $USERNAME
 RUN addgroup -S $USERNAME
 RUN groupmod --gid $USER_GID $USERNAME \
     && usermod --uid $USER_UID --gid $USER_GID $USERNAME \
