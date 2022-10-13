@@ -5,11 +5,11 @@ LABEL version="1.1.0" \
 RUN apk add sudo
 
 # Create a group and user
-RUN addgroup -S sonargrp && adduser -S -H sonar -G sonargrp
+RUN addgroup -S sonargrp && adduser -S -h sonar -G sonargrp
 
 # Tell docker that all future commands should run as the sonar user
 USER sonar
-RUN chmod=rwx .
+RUN chmod -R =rwx ./home/sonar
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
