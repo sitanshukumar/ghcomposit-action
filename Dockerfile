@@ -1,4 +1,8 @@
 FROM sonarsource/sonar-scanner-cli:4.7
+RUN groupadd docker
+RUN useradd -u 8877 sonar
+RUN usermod -aG docker sonar
+USER sonar
 
 LABEL version="1.1.0" \
       maintainer="SonarSource" 
