@@ -2,7 +2,8 @@ FROM sonarsource/sonar-scanner-cli:4.7
 
 LABEL version="1.1.0" \
       maintainer="SonarSource" 
-      
+RUN addgroup -S sonargroup && adduser -S sonaruser -G sonargroup 
+USER sonaruser
 
 
 COPY entrypoint.sh /entrypoint.sh
