@@ -7,7 +7,7 @@ USER sonaruser
 
 
 COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+RUN chmod 777 /entrypoint.sh
 COPY cleanup.sh /cleanup.sh
-RUN chmod +x /cleanup.sh
+RUN chmod 777 /cleanup.sh
 ENTRYPOINT ["/entrypoint.sh"]
