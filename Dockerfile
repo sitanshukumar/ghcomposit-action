@@ -15,8 +15,8 @@ RUN adduser \
     $user
 WORKDIR $home
 USER $user
-COPY entrypoint.sh /entrypoint.sh
+COPY ./entrypoint.sh $home/entrypoint.sh
 RUN chmod +x entrypoint.sh
-COPY cleanup.sh /cleanup.sh
+COPY ./cleanup.sh $home/cleanup.sh
 RUN chmod +x /cleanup.sh
 ENTRYPOINT ["./entrypoint.sh"]
