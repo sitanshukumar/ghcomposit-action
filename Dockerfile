@@ -6,9 +6,9 @@ SHELL ["/bin/sh", "-c"]
 RUN apk add --no-cache bash
 ARG user=sonar
 ARG home=/home/$user
-RUN addgroup -S docker
-RUN adduser \
-    --disabled-password \
+RUN adduser -G wheel,docker; 
+RUN echo 'sonar:123' | chpasswd; 
+RUN echo 'permit :wheel as root' > /etc/doas.d/doas.conf\
     --gecos "" \
     --home $home \
     --ingroup docker \
