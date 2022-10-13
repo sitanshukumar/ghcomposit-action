@@ -1,19 +1,10 @@
 FROM sonarsource/sonar-scanner-cli:4.7
 
 LABEL version="1.1.0" \
-      maintainer="SonarSource" 
-RUN apk add --no-cache shadow
-ARG USERNAME=sonar
-ARG USER_UID=1001
-ARG USER_GID=$USER_UID
-RUN adduser -D $USERNAME
-RUN addgroup -S sonargrp
-RUN groupmod --gid $USER_GID $USERNAME \
-    && usermod --uid $USER_UID --gid $USER_GID $USERNAME \
-    && chown -R $USER_UID:$USER_GID /home/$USERNAME
-USER $USERNAME
-COPY entrypoint.sh $home/entrypoint.sh
-RUN chmod 777 $home/entrypoint.sh
-COPY cleanup.sh $home//cleanup.sh .
-RUN chmod 777 $home//cleanup.sh
-ENTRYPOINT ["$home/entrypoint.sh"]
+      maintainer="SonarSource" \
+
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+COPY cleanup.sh /cleanup.sh
+RUN chmod +x /cleanup.sh
+ENTRYPOINT ["/entrypoint.sh"]
