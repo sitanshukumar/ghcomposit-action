@@ -4,7 +4,7 @@ LABEL version="1.1.0" \
       maintainer="SonarSource" 
 SHELL ["/bin/sh", "-c"]
 RUN apk add --no-cache bash
-ARG user=hakond
+ARG user=sonar
 ARG home=/home/$user
 RUN addgroup -S docker
 RUN adduser \
@@ -15,8 +15,8 @@ RUN adduser \
     $user
 WORKDIR $home
 USER $user
-COPY --chown=$user entrypoint.sh /entrypoint.sh
+COPY chown=$user entrypoint.sh /entrypoint.sh
 RUN chmod +x entrypoint.sh
-COPY --chown=$user cleanup.sh /cleanup.sh
+COPY chown=$user cleanup.sh /cleanup.sh
 RUN chmod +x /cleanup.sh
 ENTRYPOINT ["./entrypoint.sh"]
