@@ -2,14 +2,10 @@ FROM sonarsource/sonar-scanner-cli:4.7
 
 LABEL version="1.1.0" \
       maintainer="SonarSource" 
-RUN apk add sudo
-
-# Create a group and user
-RUN addgroup -S sonargrp && adduser -S sonar -G sonargrp
-
-# Tell docker that all future commands should run as the sonar user
+RUN adduser sonar
+RUN  echo '%wheel ALL=(ALL) ALL' > /etc/sudoers.d/wheel
+RUN adduser sonar wheel
 USER sonar
-RUN chmod -R =rwx ./home/sonar
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
